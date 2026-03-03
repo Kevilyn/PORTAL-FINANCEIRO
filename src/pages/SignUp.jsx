@@ -341,7 +341,6 @@ const SignUp = () => {
       <Logo size="medium" link={false} className="mb-8" />
       
       <motion.div 
-        layout
         className="w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden"
       >
         {/* Progress Bar */}
@@ -386,6 +385,7 @@ const SignUp = () => {
                                     onChange={handleInputChange} 
                                     placeholder="Seu nome completo"
                                     error={errors.nome}
+                                    autoFocus
                                 />
                                 {errors.nome && <span className="text-xs text-red-500">{errors.nome}</span>}
                             </div>

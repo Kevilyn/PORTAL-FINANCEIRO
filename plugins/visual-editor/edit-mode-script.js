@@ -3,12 +3,10 @@ import { POPUP_STYLES } from "./plugins/visual-editor/visual-editor-config.js";
 
 const PLUGIN_APPLY_EDIT_API_URL = "/api/apply-edit";
 
-const ALLOWED_PARENT_ORIGINS = [
-	"https://horizons.hostinger.com",
-	"https://horizons.hostinger.dev",
-	"https://horizons-frontend-local.hostinger.dev",
-	"http://localhost:4000",
-];
+// Use shared utility for allowed origins injected globally
+const ALLOWED_PARENT_ORIGINS =
+    (window.__UTILS__ && window.__UTILS__.getAllowedOrigins()) || [];
+
 
 let disabledTooltipElement = null;
 let currentDisabledHoverElement = null;
@@ -135,22 +133,7 @@ function handleGlobalEvent(event) {
 }
 
 function getParentOrigin() {
-	if (
-		window.location.ancestorOrigins &&
-		window.location.ancestorOrigins.length > 0
-	) {
-		return window.location.ancestorOrigins[0];
-	}
-
-	if (document.referrer) {
-		try {
-			return new URL(document.referrer).origin;
-		} catch (e) {
-			console.warn("Invalid referrer URL:", document.referrer);
-		}
-	}
-
-	return null;
+    return (window.__UTILS__ && window.__UTILS__.getParentOrigin()) || null;
 }
 
 async function handleEditSave(updatedText) {

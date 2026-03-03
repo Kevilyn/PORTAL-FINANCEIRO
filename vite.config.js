@@ -7,6 +7,8 @@ import iframeRouteRestorationPlugin from './plugins/vite-plugin-iframe-route-res
 import selectionModePlugin from './plugins/selection-mode/vite-plugin-selection-mode.js';
 
 const isDev = process.env.NODE_ENV !== 'production';
+// Habilitar handlers da Hostinger apenas se explicitamente configurado
+const enableHorizonsHandlers = process.env.VITE_ENABLE_HORIZONS_HANDLERS === 'true';
 
 const configHorizonsViteErrorHandler = `
 const observer = new MutationObserver((mutations) => {
@@ -167,38 +169,83 @@ if (window.navigation && window.self !== window.top) {
 const addTransformIndexHtml = {
 	name: 'add-transform-index-html',
 	transformIndexHtml(html) {
+		// Injetar configuração global de origens permitidas
+		const allowedOrigins = process.env.VITE_ALLOWED_PARENT_ORIGINS 
+			? process.env.VITE_ALLOWED_PARENT_ORIGINS.split(',').map(o => o.trim())
+			: [
+				"https://horizons.hostinger.com",
+				"https://horizons.hostinger.dev",
+				"https://horizons-frontend-local.hostinger.dev",
+				"http://localhost:3000",
+				"http://localhost:5173",
+			];
+
+		const configInjection = `window.__CONFIG_ALLOWED_ORIGINS__ = ${JSON.stringify(allowedOrigins)};
+window.__UTILS__ = window.__UTILS__ || {};
+window.__UTILS__.getAllowedOrigins = () => window.__CONFIG_ALLOWED_ORIGINS__ || [];
+window.__UTILS__.isOriginAllowed = origin => window.__UTILS__.getAllowedOrigins().includes(origin);
+window.__UTILS__.getParentOrigin = () => {
+    if (window.location.ancestorOrigins && window.location.ancestorOrigins.length > 0) {
+        return window.location.ancestorOrigins[0];
+    }
+    if (document.referrer) {
+        try {
+            return new URL(document.referrer).origin;
+        } catch (e) {
+            // ignore
+        }
+    }
+    return null;
+};`;
+
 		const tags = [
 			{
 				tag: 'script',
 				attrs: { type: 'module' },
-				children: configHorizonsRuntimeErrorHandler,
+				children: configInjection,
 				injectTo: 'head',
 			},
-			{
-				tag: 'script',
-				attrs: { type: 'module' },
-				children: configHorizonsViteErrorHandler,
-				injectTo: 'head',
-			},
-			{
-				tag: 'script',
-				attrs: {type: 'module'},
-				children: configHorizonsConsoleErrroHandler,
-				injectTo: 'head',
-			},
+		];
+
+		// Adicionar handlers de Horizons apenas se habilitado
+		if (enableHorizonsHandlers) {
+			tags.push(
+				{
+					tag: 'script',
+					attrs: { type: 'module' },
+					children: configHorizonsRuntimeErrorHandler,
+					injectTo: 'head',
+				},
+				{
+					tag: 'script',
+					attrs: { type: 'module' },
+					children: configHorizonsViteErrorHandler,
+					injectTo: 'head',
+				},
+				{
+					tag: 'script',
+					attrs: {type: 'module'},
+					children: configHorizonsConsoleErrroHandler,
+					injectTo: 'head',
+				},
+				{
+					tag: 'script',
+					attrs: { type: 'module' },
+					children: configNavigationHandler,
+					injectTo: 'head',
+				}
+			);
+		}
+
+		// Sempre adicionar handlers gerais
+		tags.push(
 			{
 				tag: 'script',
 				attrs: { type: 'module' },
 				children: configWindowFetchMonkeyPatch,
 				injectTo: 'head',
-			},
-			{
-				tag: 'script',
-				attrs: { type: 'module' },
-				children: configNavigationHandler,
-				injectTo: 'head',
-			},
-		];
+			}
+		);
 
 		if (!isDev && process.env.TEMPLATE_BANNER_SCRIPT_URL && process.env.TEMPLATE_REDIRECT_URL) {
 			tags.push(

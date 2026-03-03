@@ -3,12 +3,11 @@ export default function iframeRouteRestorationPlugin() {
     name: 'vite:iframe-route-restoration',
     apply: 'serve',
     transformIndexHtml() {
+      // Suportar configuração via variáveis de ambiente ou fallback para localhost
+      // rely on global utils for allowed origins
       const script = `
-      const ALLOWED_PARENT_ORIGINS = [
-          "https://horizons.hostinger.com",
-          "https://horizons.hostinger.dev",
-          "https://horizons-frontend-local.hostinger.dev",
-      ];
+      const ALLOWED_PARENT_ORIGINS = (window.__UTILS__ && window.__UTILS__.getAllowedOrigins()) || [];
+`
 
         // Check to see if the page is in an iframe
         if (window.self !== window.top) {

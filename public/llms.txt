@@ -1,0 +1,30 @@
+## Pages
+- [Adiantamento de Parcelas](/dashboardadiantamento): No description available
+- [Adiantar Parcelas - Portal Financeiro](/adiantarparcelas): No description available
+- [Adiantar Parcelas - Portal Financeiro Casas Bahia](/dashboardadiantarparcelas): No description available
+- [Adiantar Parcelas - Seleção](/adiantarparcelaslista): No description available
+- [Ajuda - Portal Financeiro Casas Bahia](/dashboardajuda): Central de ajuda e suporte ao cliente
+- [banQi - Portal Financeiro](/dashboardbanqi): No description available
+- [BanQi Casas Bahia - Portal Financeiro](/dashboardbankcasasbahia): No description available
+- [BanQi Casas Bahia - Portal Financeiro](/dashboardcasasbahia): No description available
+- [Bem-vindo ao Portal Financeiro Casas Bahia](/home): Gerencie suas compras, negocie acordos e aproveite benefícios exclusivos no Portal Financeiro Casas Bahia.
+- [Carnê Digital - Indisponível](/dashboardcarnedigital): No description available
+- [Cartão BanQi Casas Bahia](/dashboardcartaocasasbahia): No description available
+- [Central de Ajuda e Suporte - Casas Bahia](/support): Tire suas dúvidas, acesse guias e entre em contato com nosso suporte.
+- [Comprovantes - Portal Financeiro](/receiptscenter): No description available
+- [Conheça nossos Produtos](/dashboardprodutos): No description available
+- [Dashboard - Portal Casas Bahia](/dashboardinicio): No description available
+- [Gerenciar Usuários - Admin banQi](/adminusers): No description available
+- [Meu Perfil | Portal de Negociação](/dashboardperfil): No description available
+- [Meus Acordos - Portal Financeiro](/consolidatedagreements): No description available
+- [Meus Acordos - Portal Financeiro](/myagreements): No description available
+- [Meus Produtos - Casas Bahia](/dashboardmeusprodutos): No description available
+- [Pagamento Confirmado](/dashboardconfirmacaopagamento): No description available
+- [Pagamentos e Acordos - Portal Financeiro](/dashboardpagamentos): No description available
+- [Painel Administrativo - banQi](/admindashboard): No description available
+- [Portal Financeiro Casas Bahia - Gerencie suas finanças](/home): Bem-vindo ao Portal Financeiro Casas Bahia. Consulte seu CPF, negocie acordos e aproveite benefícios exclusivos.
+- [Processar Adiantamento - Portal Financeiro](/processaradiantamento): No description available
+- [Selecionar Contrato - Simular Acordo](/simularacordo): No description available
+- [Simular Acordo - Portal Financeiro](/dashboardsimularacordo): No description available
+- [Simular Acordo - Portal Financeiro](/simularacordo): No description available
+- [Simular Acordo - Seleção](/simularacordolista): No description available

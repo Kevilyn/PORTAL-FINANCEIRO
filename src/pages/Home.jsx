@@ -79,7 +79,7 @@ const Home = () => {
                   <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-400/20 rounded-full blur-3xl" />
                   
                   <img
-                    src="https://horizons-cdn.hostinger.com/5f5fd64d-365a-43a8-ad0d-f030cca0a0f7/cb-reproducao-768x333-rcB0r.webp"
+                    src={`${import.meta.env.VITE_CDN_BASE_URL || window.location.origin}/assets/app-hero-image.webp`}
                     alt="Menino usando aplicativo financeiro no celular"
                     className="w-full h-auto object-cover rounded-xl md:rounded-2xl shadow-2xl relative z-10 hover:scale-[1.01] transition-transform duration-500"
                     loading="eager"

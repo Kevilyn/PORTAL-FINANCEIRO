@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 const Logo = ({ size = 'medium', link = false, className, to = "/" }) => {
+  // URL do logo - suporta configuração via CDN ou usa padrão
+  const cdnBaseUrl = import.meta.env.VITE_CDN_BASE_URL || window.location.origin;
+  const logoUrl = `${cdnBaseUrl}/assets/logo-casas-bahia.png`;
+  
   // Responsive sizing classes based on props
   const sizeClasses = {
     small: 'w-[80px]',
@@ -12,7 +16,7 @@ const Logo = ({ size = 'medium', link = false, className, to = "/" }) => {
 
   const LogoImage = () => (
     <img
-      src="https://horizons-cdn.hostinger.com/5f5fd64d-365a-43a8-ad0d-f030cca0a0f7/b97d75d5af4d4c83d4b3eb621887a8bc.png"
+      src={logoUrl}
       alt="Casas Bahia"
       className={cn(
         "object-contain h-auto transition-opacity duration-300 hover:opacity-80",

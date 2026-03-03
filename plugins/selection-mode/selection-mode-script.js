@@ -1,9 +1,7 @@
-const ALLOWED_PARENT_ORIGINS = [
-	'https://horizons.hostinger.com',
-	'https://horizons.hostinger.dev',
-	'https://horizons-frontend-local.hostinger.dev',
-	'http://localhost:4000',
-];
+// Use shared utility for allowed origins (injetado pelo vite.config)
+const ALLOWED_PARENT_ORIGINS =
+	(window.__UTILS__ && window.__UTILS__.getAllowedOrigins()) || [];
+
 
 const IMPORTANT_STYLES = [
 	'display',
@@ -64,23 +62,9 @@ function injectStyles() {
 	document.head.appendChild(style);
 }
 
+// delegate to shared util
 function getParentOrigin() {
-	if (
-		window.location.ancestorOrigins
-		&& window.location.ancestorOrigins.length > 0
-	) {
-		return window.location.ancestorOrigins[0];
-	}
-
-	if (document.referrer) {
-		try {
-			return new URL(document.referrer).origin;
-		} catch {
-			console.warn('[SELECTION MODE] Invalid referrer URL:', document.referrer);
-		}
-	}
-
-	return null;
+    return (window.__UTILS__ && window.__UTILS__.getParentOrigin()) || null;
 }
 
 /**
