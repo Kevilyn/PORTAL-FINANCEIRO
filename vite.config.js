@@ -7,6 +7,8 @@ import iframeRouteRestorationPlugin from './plugins/vite-plugin-iframe-route-res
 import selectionModePlugin from './plugins/selection-mode/vite-plugin-selection-mode.js';
 
 const isDev = process.env.NODE_ENV !== 'production';
+// Use VITE_BASE_URL for GitHub Pages, default to /
+const baseUrl = process.env.VITE_BASE_URL ? process.env.VITE_BASE_URL : (process.env.NODE_ENV === 'production' ? '/PORTAL-FINANCEIRO/' : '/');
 // Habilitar handlers da Hostinger apenas se explicitamente configurado
 const enableHorizonsHandlers = process.env.VITE_ENABLE_HORIZONS_HANDLERS === 'true';
 
@@ -281,7 +283,7 @@ logger.error = (msg, options) => {
 }
 
 export default defineConfig({
-	base: process.env.VITE_BASE_URL || '/',
+	base: baseUrl,
 	customLogger: logger,
 	plugins: [
 		...(isDev ? [inlineEditPlugin(), editModeDevPlugin(), iframeRouteRestorationPlugin(), selectionModePlugin()] : []),
